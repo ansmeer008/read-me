@@ -15,7 +15,8 @@
       "resolveJsonModule": true,
       "isolatedModules": true,
       "noEmit": true, // 바벨이 트랜스파일을 대신하므로 결과물을 내뱉지 않음
-      "jsx": "react-jsx" // React 17 이상 버전의 JSX 변환 방식
+      "jsx": "react-jsx", // React 17 이상 버전의 JSX 변환 방식
+      "types": ["node"]
     },
     "include": ["src", "types"]
   }

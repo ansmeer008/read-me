@@ -1,5 +1,6 @@
 const path = require('path'); 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     mode: 'development', // 개발 모드
@@ -15,6 +16,14 @@ module.exports = {
     module: {
       rules: [
         {
+          test: /\.css$/i,
+          use: [
+            'style-loader', 
+            'css-loader', 
+            'postcss-loader'
+          ],
+        },
+        {
           test: /\.(ts|tsx)$/,
           exclude: /node_modules/,
           use: 'babel-loader', // TS/TSX 파일을 바벨로 처리
@@ -22,6 +31,7 @@ module.exports = {
       ],
     },
     plugins: [
+      new Dotenv(),
       new HtmlWebpackPlugin({
         template: './public/index.html', // 템플릿 파일 연결
       }),
