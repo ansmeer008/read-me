@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/Layout';
 import ListPage from './pages/list';
 import DetailPage from './pages/detail';
+import WritePage from './pages/write';
 
 const router = createBrowserRouter([{
   path:'/',
@@ -13,6 +14,10 @@ const router = createBrowserRouter([{
     },{
       path:'episode/:id',
       element:<DetailPage/>
+    },
+    {
+      path: 'write', 
+      element: <WritePage />
     }
   ]
 }])

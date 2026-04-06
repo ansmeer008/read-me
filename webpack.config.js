@@ -9,6 +9,7 @@ module.exports = {
       path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js',
       clean: true, // 빌드 시 이전 파일 삭제
+      publicPath: '/',
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js', '.jsx'], // 확장자 생략 가능하게 설정
@@ -37,6 +38,7 @@ module.exports = {
       }),
     ],
     devServer: {
+      historyApiFallback: true,
       port: 3000,
       hot: true, // 수정 시 자동 새로고침
       open: true, // 실행 시 브라우저 열기

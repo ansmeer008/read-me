@@ -36,13 +36,21 @@ const ListPage = () => {
               </div>
               <div className="text-gray-300 group-hover:text-blue-400 transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="9 5l7 7-7 7" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </div>
             </div>
           </Link>
         ))}
       </div>
+
+      <Link
+        to="/write" 
+        className="fixed bottom-30 right-8 flex items-center justify-center w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 hover:scale-110 transition-all active:scale-95 focus:outline-none text-3xl"
+        aria-label="새 글 작성"
+      >
+       +
+      </Link>
     </section>
   );
 };

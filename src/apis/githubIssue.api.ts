@@ -17,9 +17,10 @@ const githubClient = createClient({
 export const githubService = {
     async getEpisodeList(){
         const { data } = await githubClient.get(`/repos/${owner}/${repoName}/issues`, {
-            params: { state: 'open', sort: 'created', direction: 'asc' }
+            params: { state: 'open', sort: 'created', direction: 'asc', labels: 'novel-episode' }
           });
-          return data;
+          
+          return data.filter((issue: any) => !issue.pull_request);
     },
     async getEpisodeDetail(issueNumber: number) {
         const { data } = await githubClient.get(`/repos/${owner}/${repoName}/issues/${issueNumber}`);

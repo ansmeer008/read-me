@@ -9,9 +9,7 @@ const Layout = () => {
           <Link to="/" className="text-2xl font-bold text-blue-600 tracking-tight">
             READ-ME <span className="text-gray-400 font-light text-sm ml-2">Web Novel</span>
           </Link>
-          <nav>
-            <Link to="/" className="text-gray-600 hover:text-blue-600 font-medium">내 서재</Link>
-          </nav>
+       
         </div>
       </header>
 
