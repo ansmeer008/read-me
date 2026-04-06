@@ -73,7 +73,7 @@ const DetailPage = () => {
       </div>
 
       {/* 헤더 */}
-      <header className="bg-ivory mb-12 text-center">
+      <header className="mb-12 text-center">
         <h1 className="font-serif font-bold text-gray-900 leading-tight mb-4 transition-[font-size] duration-200"
         style={{ fontSize: `${fontSize}px` }} 
         >

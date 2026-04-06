@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Components } from 'react-markdown';
@@ -10,6 +11,9 @@ interface EpisodeViewerProps {
 
 const EpisodeViewer = ({ content }: EpisodeViewerProps) => {
   const MarkdownComponents: Components = {
+    p({ children }) {
+      return <p className="mb-6 last:mb-0 whitespace-pre-wrap">{children}</p>;
+    },
     // 코드 블록 (```) 처리
     code({ node, className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || '');
@@ -51,7 +55,7 @@ const EpisodeViewer = ({ content }: EpisodeViewerProps) => {
 
   return (
     <div className="markdown-viewer font-serif text-gray-800 leading-loose tracking-wide">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={MarkdownComponents}>
+      <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} components={MarkdownComponents}>
         {content}
       </ReactMarkdown>
     </div>

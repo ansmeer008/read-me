@@ -53,6 +53,7 @@ const RAW_RUNTIME_STATE =
           ["react-router-dom", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:7.14.0"],\
           ["react-syntax-highlighter", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:16.1.1"],\
           ["read-me", "workspace:."],\
+          ["remark-breaks", "npm:4.0.0"],\
           ["remark-gfm", "npm:4.0.1"],\
           ["style-loader", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:4.0.0"],\
           ["tailwindcss", "npm:4.2.2"],\
@@ -6963,6 +6964,17 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["mdast-util-newline-to-break", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "../.yarn/berry/cache/mdast-util-newline-to-break-npm-2.0.0-1499468942-10c0.zip/node_modules/mdast-util-newline-to-break/",\
+        "packageDependencies": [\
+          ["@types/mdast", "npm:4.0.4"],\
+          ["mdast-util-find-and-replace", "npm:3.0.2"],\
+          ["mdast-util-newline-to-break", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["mdast-util-phrasing", [\
       ["npm:4.1.0", {\
         "packageLocation": "../.yarn/berry/cache/mdast-util-phrasing-npm-4.1.0-30939ebbcd-10c0.zip/node_modules/mdast-util-phrasing/",\
@@ -8476,6 +8488,7 @@ const RAW_RUNTIME_STATE =
           ["react-router-dom", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:7.14.0"],\
           ["react-syntax-highlighter", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:16.1.1"],\
           ["read-me", "workspace:."],\
+          ["remark-breaks", "npm:4.0.0"],\
           ["remark-gfm", "npm:4.0.1"],\
           ["style-loader", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:4.0.0"],\
           ["tailwindcss", "npm:4.2.2"],\
@@ -8613,6 +8626,18 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../.yarn/berry/cache/relateurl-npm-0.2.7-7687cc0a2a-10c0.zip/node_modules/relateurl/",\
         "packageDependencies": [\
           ["relateurl", "npm:0.2.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["remark-breaks", [\
+      ["npm:4.0.0", {\
+        "packageLocation": "../.yarn/berry/cache/remark-breaks-npm-4.0.0-962f376971-10c0.zip/node_modules/remark-breaks/",\
+        "packageDependencies": [\
+          ["@types/mdast", "npm:4.0.4"],\
+          ["mdast-util-newline-to-break", "npm:2.0.0"],\
+          ["remark-breaks", "npm:4.0.0"],\
+          ["unified", "npm:11.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\
