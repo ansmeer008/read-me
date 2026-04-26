@@ -15,7 +15,7 @@ const EpisodeViewer = ({ content }: EpisodeViewerProps) => {
       return <p className="mb-6 last:mb-0 whitespace-pre-wrap">{children}</p>;
     },
     // 코드 블록 (```) 처리
-    code({ node, className, children, ...props }) {
+    code({ className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || '');
       const language = match ? match[1] : '';
 
@@ -28,8 +28,8 @@ const EpisodeViewer = ({ content }: EpisodeViewerProps) => {
             <span className="text-green-500">● Online</span>
           </div>
           <SyntaxHighlighter
-          {...(props as any)}
-            style={vscDarkPlus} 
+            {...(props as any)}
+            style={vscDarkPlus}
             language={language}
             PreTag="div"
             customStyle={{ margin: 0, padding: '1.5rem', lineHeight: '1.5' }}
@@ -40,7 +40,10 @@ const EpisodeViewer = ({ content }: EpisodeViewerProps) => {
         </div>
       ) : (
         // 인라인 코드 (`) 처리
-        <code className="bg-gray-100 text-pink-600 px-1.5 py-0.5 rounded font-mono text-[0.9em]" {...props}>
+        <code
+          className="bg-gray-100 text-pink-600 px-1.5 py-0.5 rounded font-mono text-[0.9em]"
+          {...props}
+        >
           {children}
         </code>
       );
@@ -55,7 +58,10 @@ const EpisodeViewer = ({ content }: EpisodeViewerProps) => {
 
   return (
     <div className="markdown-viewer font-serif text-gray-800 leading-loose tracking-wide">
-      <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} components={MarkdownComponents}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkBreaks]}
+        components={MarkdownComponents}
+      >
         {content}
       </ReactMarkdown>
     </div>

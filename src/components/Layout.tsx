@@ -6,10 +6,15 @@ const Layout = () => {
       {/* 상단 헤더 */}
       <header className="bg-white border-b sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-blue-600 tracking-tight">
-            READ-ME <span className="text-gray-400 font-light text-sm ml-2">Web Novel</span>
+          <Link
+            to="/"
+            className="text-2xl font-bold text-blue-600 tracking-tight"
+          >
+            READ-ME{' '}
+            <span className="text-gray-400 font-light text-sm ml-2">
+              Web Novel
+            </span>
           </Link>
-       
         </div>
       </header>
 
