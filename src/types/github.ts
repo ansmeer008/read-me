@@ -1,7 +1,16 @@
-import { Endpoints } from '@octokit/types';
-
-export type GitHubIssueResponse =
-  Endpoints['GET /repos/{owner}/{repo}/issues']['response']['data'][number];
+export interface GitHubIssueResponse {
+  id: number;
+  number: number;
+  title: string;
+  body: string | null;
+  state: 'open' | 'closed';
+  created_at: string;
+  updated_at: string;
+  comments: number;
+  labels?: Array<{ id?: number; name: string; color?: string }>;
+  pull_request?: unknown;
+  _isOptimistic?: boolean;
+}
 
 export interface CreateEpisodeRequest {
   title: string;

@@ -1,7 +1,6 @@
 import { ERROR_CODE_MAP } from '../enums/error';
 import { AppError, ErrorCode } from '../types/error';
 
-// GitHub API 응답 → AppError 변환
 export async function parseGithubError(response: Response): Promise<AppError> {
   let message = `HTTP ${response.status}`;
   try {

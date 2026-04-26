@@ -3,6 +3,8 @@ import Layout from './components/Layout';
 import ListPage from './pages/list';
 import DetailPage from './pages/detail';
 import WritePage from './pages/write';
+import EditPage from './pages/edit';
+import GlobalToaster from './components/GlobalToaster';
 
 const router = createBrowserRouter([
   {
@@ -21,10 +23,19 @@ const router = createBrowserRouter([
         path: 'write',
         element: <WritePage />,
       },
+      {
+        path: 'edit',
+        element: <EditPage />,
+      },
     ],
   },
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <GlobalToaster />
+      <RouterProvider router={router} />
+    </>
+  );
 }
