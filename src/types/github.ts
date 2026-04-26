@@ -14,3 +14,13 @@ export interface UpdateEpisodeRequest {
   body?: string;
   state?: 'open' | 'closed';
 }
+
+export interface GitHubErrorResponse {
+  message: string;
+  errors?: Array<{
+    resource: string;
+    field: string;
+    code: string;
+  }>;
+  documentation_url?: string;
+}
