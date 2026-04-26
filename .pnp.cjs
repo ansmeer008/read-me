@@ -33,6 +33,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/preset-react", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:7.28.5"],\
           ["@babel/preset-typescript", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:7.28.5"],\
           ["@eslint/js", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:10.0.1"],\
+          ["@octokit/types", "npm:16.0.0"],\
           ["@tailwindcss/postcss", "npm:4.2.2"],\
           ["@tanstack/react-query", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:5.96.2"],\
           ["@tanstack/react-query-devtools", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:5.96.2"],\
@@ -3083,6 +3084,25 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../.yarn/berry/cache/@npmcli-redact-npm-4.0.0-b3e2eeb8d8-10c0.zip/node_modules/@npmcli/redact/",\
         "packageDependencies": [\
           ["@npmcli/redact", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@octokit/openapi-types", [\
+      ["npm:27.0.0", {\
+        "packageLocation": "../.yarn/berry/cache/@octokit-openapi-types-npm-27.0.0-e607516b0f-10c0.zip/node_modules/@octokit/openapi-types/",\
+        "packageDependencies": [\
+          ["@octokit/openapi-types", "npm:27.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@octokit/types", [\
+      ["npm:16.0.0", {\
+        "packageLocation": "../.yarn/berry/cache/@octokit-types-npm-16.0.0-da01afac91-10c0.zip/node_modules/@octokit/types/",\
+        "packageDependencies": [\
+          ["@octokit/openapi-types", "npm:27.0.0"],\
+          ["@octokit/types", "npm:16.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10217,6 +10237,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/preset-react", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:7.28.5"],\
           ["@babel/preset-typescript", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:7.28.5"],\
           ["@eslint/js", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:10.0.1"],\
+          ["@octokit/types", "npm:16.0.0"],\
           ["@tailwindcss/postcss", "npm:4.2.2"],\
           ["@tanstack/react-query", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:5.96.2"],\
           ["@tanstack/react-query-devtools", "virtual:540f4c9ece849d9ac7b9e983556b3dd36f9065fcb16848256de92d4c59cc231f05286d8a4ac0612e587b7634073797246ebf063d2b462af3480d6b40eed435a5#npm:5.96.2"],\

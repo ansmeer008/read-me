@@ -33,9 +33,8 @@ const ListPage = () => {
           총 {episodes?.length || 0}화
         </span>
       </div>
-      {/* TODO:: any 타입 지정해주기 */}
       <div className="grid gap-4">
-        {episodes?.map((ep: any) => (
+        {episodes?.map((ep) => (
           <Link
             key={ep.number}
             to={`/episode/${ep.number}`}

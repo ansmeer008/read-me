@@ -1,4 +1,9 @@
 import { createClient } from '../utils/fetchClient';
+import {
+  GitHubIssueResponse,
+  CreateEpisodeRequest,
+  UpdateEpisodeRequest,
+} from '../types/github';
 
 const baseUrl = process.env.GITHUB_BASE_URL;
 const token = process.env.GITHUB_TOKEN;
@@ -14,10 +19,9 @@ const githubClient = createClient({
   },
 });
 
-//TODO:: any 말고 interface 정의하기
 export const githubService = {
-  async getEpisodeList() {
-    const { data } = await githubClient.get(
+  async getEpisodeList(): Promise<GitHubIssueResponse[]> {
+    const { data } = await githubClient.get<GitHubIssueResponse[]>(
       `/repos/${owner}/${repoName}/issues`,
       {
         params: {
@@ -29,36 +33,47 @@ export const githubService = {
       },
     );
 
-    return data.filter((issue: any) => !issue.pull_request);
+    return data.filter((issue) => !issue.pull_request);
   },
-  async getEpisodeDetail(issueNumber: number) {
-    const { data } = await githubClient.get(
+  async getEpisodeDetail(issueNumber: number): Promise<GitHubIssueResponse> {
+    const { data } = await githubClient.get<GitHubIssueResponse>(
       `/repos/${owner}/${repoName}/issues/${issueNumber}`,
     );
     return data;
   },
-  async createEpisode(title: string, content: string) {
-    const { data } = await githubClient.post(
+  async createEpisode(
+    title: string,
+    content: string,
+  ): Promise<GitHubIssueResponse> {
+    const body: CreateEpisodeRequest = {
+      title,
+      body: content,
+      labels: ['novel-episode'],
+    };
+
+    const { data } = await githubClient.post<GitHubIssueResponse>(
       `/repos/${owner}/${repoName}/issues`,
-      {
-        title,
-        body: content,
-        labels: ['novel-episode'], // 라벨로 데이터 구분 가능
-      },
+      body,
     );
     return data;
   },
-  async updateEpisode(issueNumber: number, title: string, content: string) {
-    const { data } = await githubClient.patch(
+  async updateEpisode(
+    issueNumber: number,
+    title: string,
+    content: string,
+  ): Promise<GitHubIssueResponse> {
+    const body: UpdateEpisodeRequest = {
+      title,
+      body: content,
+    };
+
+    const { data } = await githubClient.patch<GitHubIssueResponse>(
       `/repos/${owner}/${repoName}/issues/${issueNumber}`,
-      {
-        title,
-        body: content,
-      },
+      body,
     );
     return data;
   },
-  async deleteEpisode(issueNumber: number) {
+  async deleteEpisode(issueNumber: number): Promise<void> {
     await githubClient.patch(
       `/repos/${owner}/${repoName}/issues/${issueNumber}`,
       {
