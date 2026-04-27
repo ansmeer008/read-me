@@ -3,9 +3,34 @@ import { githubService } from '../apis/githubIssue.api';
 import { useNavigate } from 'react-router-dom';
 import { useOptimisticMutation } from './useOptimisticMutation';
 import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
 
 export function useCreateEpisode() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  // const syncAfterCreate = async (createdNumber: number) => {
+  //   for (const delay of [3000, 3000, 5000]) {
+  //     await new Promise((r) => setTimeout(r, delay));
+
+  //     try {
+  //       const episode = await githubService.getEpisodeDetail(createdNumber);
+
+  //       if (episode) {
+  //         queryClient.setQueryData<GitHubIssueResponse[]>(
+  //           ['episodes'],
+  //           (old = []) =>
+  //             old.map((ep) =>
+  //               ep.number === createdNumber
+  //                 ? { ...episode, _isOptimistic: false }
+  //                 : ep,
+  //             ),
+  //         );
+  //         return;
+  //       }
+  //     } catch {}
+  //   }
+  // };
 
   return useOptimisticMutation<
     GitHubIssueResponse[],
@@ -14,19 +39,26 @@ export function useCreateEpisode() {
     queryKey: ['episodes'],
     mutationFn: ({ title, content }) =>
       githubService.createEpisode(title, content),
-    updater: (old = [], newEpisode) => [
-      ...old,
-      {
-        id: Date.now(),
-        number: Date.now(),
-        title: newEpisode.title,
-        created_at: new Date().toISOString(),
-        _isOptimistic: true,
-      } as GitHubIssueResponse,
-    ],
-    onSuccess: () => {
+    onSuccess: (createdEpisode: GitHubIssueResponse) => {
       toast.success('원고가 등록되었습니다.');
+
+      queryClient.setQueryData<GitHubIssueResponse[]>(
+        ['episodes'],
+        (old = []) => [
+          ...old,
+          {
+            ...createdEpisode,
+            _isOptimistic: true,
+          } as GitHubIssueResponse,
+        ],
+      );
+
       navigate('/');
+
+      // syncAfterCreate(createdEpisode.number);
+    },
+    onError: () => {
+      toast.error('등록에 실패했습니다.');
     },
   });
 }

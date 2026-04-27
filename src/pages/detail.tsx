@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { githubService } from '../apis/githubIssue.api';
 import EpisodeViewer from '../components/EpisodeViewer';
 import ProgressBar from '../components/ProgressBar';
@@ -19,6 +19,14 @@ const DetailPage = () => {
   const [fontSize, setFontSize] = useState(18);
   const [showTopButton, setShowTopButton] = useState(false);
   const { mutate: deleteEpisode, isPending: isDeleting } = useDeleteEpisode();
+  const queryClient = useQueryClient();
+
+  const isOptimistic =
+    queryClient
+      .getQueryData<GitHubIssueResponse[]>(['episodes'])
+      ?.find((ep) => ep.number === Number(id))?._isOptimistic ?? false;
+
+  console.log({ isOptimistic });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,9 +45,14 @@ const DetailPage = () => {
   const { data: episode, isLoading } = useQuery<GitHubIssueResponse>({
     queryKey: ['episode', id],
     queryFn: () => githubService.getEpisodeDetail(Number(id)),
-    enabled: !!id,
+    enabled: !!id && !isOptimistic,
+    initialData: isOptimistic
+      ? queryClient
+          .getQueryData<GitHubIssueResponse[]>(['episodes'])
+          ?.find((ep) => ep.number === Number(id))
+      : undefined,
   });
-
+  console.log({ episode });
   const handleDelete = () => {
     if (!id || isDeleting) return;
 
@@ -90,33 +103,39 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-end items-center gap-4 mb-6">
-        <button
-          onClick={handleDelete}
-          disabled={isDeleting}
-          className={`cursor-pointer flex items-center gap-1 transition-colors text-sm ${
-            isDeleting
-              ? 'text-gray-300 cursor-not-allowed'
-              : 'text-gray-600 hover:text-red-500'
-          }`}
-        >
-          <TrashIcon />
-          {isDeleting ? '삭제 중...' : '삭제'}
-        </button>
-        <span className="text-gray-300">|</span>
-        <button
-          onClick={() => navigate(`/edit?id=${id}`)}
-          disabled={isDeleting}
-          className={`cursor-pointer flex items-center gap-1 transition-colors text-sm ${
-            isDeleting
-              ? 'text-gray-300 cursor-not-allowed'
-              : 'text-gray-600 hover:text-blue-600'
-          }`}
-        >
-          <EditIcon />
-          수정
-        </button>
-      </div>
+      {isOptimistic ? (
+        <div className="mb-4 px-4 py-2 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-700">
+          서버에 반영 중이에요. 수정/삭제는 잠시 후 가능해요.
+        </div>
+      ) : (
+        <div className="flex justify-end items-center gap-4 mb-6">
+          <button
+            onClick={handleDelete}
+            disabled={isDeleting}
+            className={`cursor-pointer flex items-center gap-1 transition-colors text-sm ${
+              isDeleting
+                ? 'text-gray-300 cursor-not-allowed'
+                : 'text-gray-600 hover:text-red-500'
+            }`}
+          >
+            <TrashIcon />
+            {isDeleting ? '삭제 중...' : '삭제'}
+          </button>
+          <span className="text-gray-300">|</span>
+          <button
+            onClick={() => navigate(`/edit?id=${id}`)}
+            disabled={isDeleting}
+            className={`cursor-pointer flex items-center gap-1 transition-colors text-sm ${
+              isDeleting
+                ? 'text-gray-300 cursor-not-allowed'
+                : 'text-gray-600 hover:text-blue-600'
+            }`}
+          >
+            <EditIcon />
+            수정
+          </button>
+        </div>
+      )}
       {/* 헤더 */}
       <header className="mb-12 text-center">
         <h1

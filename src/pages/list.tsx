@@ -38,12 +38,21 @@ const ListPage = () => {
           <Link
             key={ep.number}
             to={`/episode/${ep.number}`}
-            className="group block p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+            className={`group block p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all  ${
+              ep._isOptimistic
+                ? 'border-yellow-200 opacity-70'
+                : 'border-gray-200 hover:shadow-md hover:border-blue-300'
+            }`}
           >
             <div className="flex justify-between items-center">
               <div>
                 <h2 className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
                   {ep.title}
+                  {ep._isOptimistic && (
+                    <span className="ml-2 text-xs font-normal text-yellow-500">
+                      반영 중...
+                    </span>
+                  )}
                 </h2>
                 <p className="text-gray-400 text-sm mt-2 font-light">
                   {new Date(ep.created_at).toLocaleDateString()} · 조회수{' '}
