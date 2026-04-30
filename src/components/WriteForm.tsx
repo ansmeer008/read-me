@@ -25,7 +25,6 @@ export function WriteForm({
   initialValues = { title: '', content: '' },
   onSubmit,
   isPending,
-  errorMessage,
   submitLabel = '작성 완료',
 }: WriteFormProps) {
   const { values, errors, handleChange, handleSubmit, reset } =
@@ -33,7 +32,6 @@ export function WriteForm({
 
   const submit = handleSubmit((values) => {
     onSubmit(values);
-    reset();
   });
 
   return (

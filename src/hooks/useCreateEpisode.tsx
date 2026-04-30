@@ -4,33 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { useOptimisticMutation } from './useOptimisticMutation';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
+import { useSyncAfterMutation } from './useSyncAfterMutation';
 
 export function useCreateEpisode() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
-  // const syncAfterCreate = async (createdNumber: number) => {
-  //   for (const delay of [3000, 3000, 5000]) {
-  //     await new Promise((r) => setTimeout(r, delay));
-
-  //     try {
-  //       const episode = await githubService.getEpisodeDetail(createdNumber);
-
-  //       if (episode) {
-  //         queryClient.setQueryData<GitHubIssueResponse[]>(
-  //           ['episodes'],
-  //           (old = []) =>
-  //             old.map((ep) =>
-  //               ep.number === createdNumber
-  //                 ? { ...episode, _isOptimistic: false }
-  //                 : ep,
-  //             ),
-  //         );
-  //         return;
-  //       }
-  //     } catch {}
-  //   }
-  // };
+  const { sync } = useSyncAfterMutation();
 
   return useOptimisticMutation<
     GitHubIssueResponse[],
@@ -55,7 +34,7 @@ export function useCreateEpisode() {
 
       navigate('/');
 
-      // syncAfterCreate(createdEpisode.number);
+      sync((data) => data.some((ep) => ep.number === createdEpisode.number));
     },
     onError: () => {
       toast.error('등록에 실패했습니다.');

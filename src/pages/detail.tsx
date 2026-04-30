@@ -26,8 +26,6 @@ const DetailPage = () => {
       .getQueryData<GitHubIssueResponse[]>(['episodes'])
       ?.find((ep) => ep.number === Number(id))?._isOptimistic ?? false;
 
-  console.log({ isOptimistic });
-
   useEffect(() => {
     const handleScroll = () => {
       // 300px 이상 스크롤 시 버튼 표시
@@ -45,14 +43,9 @@ const DetailPage = () => {
   const { data: episode, isLoading } = useQuery<GitHubIssueResponse>({
     queryKey: ['episode', id],
     queryFn: () => githubService.getEpisodeDetail(Number(id)),
-    enabled: !!id && !isOptimistic,
-    initialData: isOptimistic
-      ? queryClient
-          .getQueryData<GitHubIssueResponse[]>(['episodes'])
-          ?.find((ep) => ep.number === Number(id))
-      : undefined,
+    enabled: !!id,
   });
-  console.log({ episode });
+
   const handleDelete = () => {
     if (!id || isDeleting) return;
 

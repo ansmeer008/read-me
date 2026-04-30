@@ -1,4 +1,3 @@
-// src/pages/EditPage.tsx
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { githubService } from '../apis/githubIssue.api';
@@ -10,20 +9,17 @@ export default function EditPage() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
 
-  // 기존 데이터 불러오기 (폼의 initialValues로 사용)
   const { data: episode, isLoading } = useQuery<GitHubIssueResponse>({
     queryKey: ['episode', id],
     queryFn: () => githubService.getEpisodeDetail(Number(id)),
     enabled: !!id,
   });
 
-  // 수정 Mutation 훅
   const { mutate: updateEpisode, isPending: isUpdating } = useUpdateEpisode();
 
   const handleUpdate = (values: EpisodeFormValues) => {
     if (!id) return;
 
-    // 낙관적 업데이트가 포함된 수정 실행
     updateEpisode({
       id: Number(id),
       title: values.title,
