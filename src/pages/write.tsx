@@ -1,12 +1,28 @@
-const WritePage = () => {
+import { WriteForm, EpisodeFormValues } from '../components/WriteForm';
+import { AppError } from '../types/error';
+import { ERROR_MESSAGES } from '../enums/error';
+import { useCreateEpisode } from '../hooks/useCreateEpisode';
+
+export default function WritePage() {
+  const { mutate, isPending, isError, error, reset } = useCreateEpisode();
+
+  const errorMessage =
+    isError && error instanceof AppError
+      ? (ERROR_MESSAGES[error.code] ?? error.message)
+      : undefined;
+
+  const handleSubmit = (values: EpisodeFormValues) => {
+    reset();
+    mutate({ title: values.title, content: values.content });
+  };
+
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">새 에피소드 작성</h1>
-      <textarea
-        className="w-full h-64 p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-        placeholder="내용을 입력하세요..."
+    <main>
+      <WriteForm
+        onSubmit={handleSubmit}
+        isPending={isPending}
+        errorMessage={errorMessage}
       />
-    </div>
+    </main>
   );
-};
-export default WritePage;
+}

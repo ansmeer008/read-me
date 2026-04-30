@@ -1,0 +1,27 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { githubService } from '../apis/githubIssue.api';
+import { GitHubIssueResponse } from '../types/github';
+import { useOptimisticMutation } from './useOptimisticMutation';
+import toast from 'react-hot-toast';
+import { useSyncAfterMutation } from './useSyncAfterMutation';
+
+export function useDeleteEpisode() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { sync } = useSyncAfterMutation();
+
+  return useOptimisticMutation<GitHubIssueResponse[], number>({
+    queryKey: ['episodes'], // 목록 쿼리 키
+    mutationFn: (issueNumber) => githubService.deleteEpisode(issueNumber),
+    updater: (old = [], deleteId) => old.filter((ep) => ep.number !== deleteId),
+    onSuccess: (_, deletedId) => {
+      toast.error('원고가 삭제되었습니다.');
+
+      queryClient.removeQueries({ queryKey: ['episode'] });
+      navigate('/');
+
+      sync((data) => !data.some((ep) => ep.number === deletedId));
+    },
+  });
+}

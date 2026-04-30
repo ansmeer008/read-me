@@ -1,29 +1,23 @@
-@import "tailwindcss";
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+@import 'tailwindcss';
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
 
 :root {
-    --my-sans: "Pretendard Variable", "Pretendard", -apple-system, sans-serif;
-    --my-ivory: #f4f1ea;
-  }
+  --my-sans: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+  --my-ivory: #f4f1ea;
+}
 
 @theme {
-    /* 1. 커스텀 컬러 정의 (이제 bg-ivory, text-ivory 사용 가능) */
-    --color-ivory: #f4f1ea;
-    
-    /* 2. 소설 전용 포인트 컬러 (예: 딥 그린) */
-    --color-novel-dark: #2c3e50;
-  
-    /* 3. 기본 폰트 시스템 교체 (Pretendard) */
-    --font-sans: var(--my-sans);
-    --color-ivory: var(--my-ivory);
-  }
-  
+  --color-novel-dark: #2c3e50;
+  --font-sans: var(--my-sans);
+  --color-ivory: var(--my-ivory);
+}
 
-  @layer base {
-    html, body {
-        font-family: var(--font-sans);
-        @apply bg-ivory text-gray-900;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
+@layer base {
+  html,
+  body {
+    font-family: var(--font-sans);
+    @apply bg-ivory text-gray-900;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+}
